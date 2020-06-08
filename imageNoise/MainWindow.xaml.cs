@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 
@@ -20,6 +21,8 @@ namespace imageNoise
         private const int ImageHeight = 240;
         private readonly Random _randomGenerator = new Random();
 
+        private DateTime FpsTimer = DateTime.Now;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -28,7 +31,7 @@ namespace imageNoise
             {
                 Dispatcher.BeginInvoke((Action) (() => { noiseImageViewer.Source = GenerateNoiseImage(); }));
             };
-            worker.RunWorkerCompleted += UpdateUI;
+            worker.RunWorkerCompleted += UpdateFps;
 
             void OnTick(object sender, object e)
             {
@@ -73,10 +76,13 @@ namespace imageNoise
             
         }
 
-        private void UpdateUI(object sender, RunWorkerCompletedEventArgs e)
+        private void UpdateFps(object sender, RunWorkerCompletedEventArgs e)
         {
-            /*noiseImageViewer.Source = NextImage;*/
-            return;
+            var now = DateTime.Now;
+            var fps = Math.Round(1 / (now - FpsTimer).TotalSeconds, 0);
+            FpsTimer = now;
+
+            Dispatcher.BeginInvoke((Action) (() => { fpsIndicator.Text = fps.ToString(); }));
         }
         
     }

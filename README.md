@@ -8,4 +8,6 @@ A collection of bits of code I wrote because I was bored.
 
 ### Shortlist of things to do next
 
-* [Calculating the Jaro distance](http://rosettacode.org/wiki/Jaro_distance)
+* [Calculating Jaro distance](http://rosettacode.org/wiki/Jaro_distance)
+* [MAC vendor lookup](http://rosettacode.org/wiki/MAC_Vendor_Lookup)
+* [Palindrome dates](http://rosettacode.org/wiki/Palindrome_dates)

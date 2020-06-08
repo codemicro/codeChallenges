@@ -1,8 +1,10 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 
 namespace imageNoise
 {
@@ -11,16 +13,35 @@ namespace imageNoise
     /// </summary>
     public partial class MainWindow
     {
+        private readonly BackgroundWorker worker = new BackgroundWorker();
+        private readonly DispatcherTimer Timer = new DispatcherTimer();
+        
         private const int ImageWidth = 320;
         private const int ImageHeight = 240;
-        private readonly Random RandomGenerator = new Random();
-        
+        private readonly Random _randomGenerator = new Random();
+
         public MainWindow()
         {
             InitializeComponent();
 
-            noiseImageViewer.Source = GenerateNoiseImage();
+            worker.DoWork += delegate
+            {
+                Dispatcher.BeginInvoke((Action) (() => { noiseImageViewer.Source = GenerateNoiseImage(); }));
+            };
+            worker.RunWorkerCompleted += UpdateUI;
 
+            void OnTick(object sender, object e)
+            {
+                try
+                {
+                    worker.RunWorkerAsync();
+                } catch (InvalidOperationException) { }  // previous tick has not finished
+            }
+           
+            Timer.Interval = TimeSpan.FromMilliseconds(16);  // 60fps maximum
+            Timer.Tick += OnTick;
+
+            Timer.Start();
         }
 
         private BitmapImage GenerateNoiseImage()
@@ -32,7 +53,7 @@ namespace imageNoise
             {
                 for (var y = 0; y < generatedImage.Height; y++)
                 {
-                    var color = RandomGenerator.Next(2) == 0 ? Color.Black : Color.White;
+                    var color = _randomGenerator.Next(2) == 0 ? Color.Black : Color.White;
                     generatedImage.SetPixel(x, y, color);
                 }
             }
@@ -51,5 +72,12 @@ namespace imageNoise
             return convertedImage;
             
         }
+
+        private void UpdateUI(object sender, RunWorkerCompletedEventArgs e)
+        {
+            /*noiseImageViewer.Source = NextImage;*/
+            return;
+        }
+        
     }
 }

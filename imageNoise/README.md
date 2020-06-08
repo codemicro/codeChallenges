@@ -18,3 +18,7 @@ Status: could be improved
 #### Images
 
 ![Screenshot](https://raw.githubusercontent.com/codemicro/codeChallenges/master/imageNoise/image.png)
+
+#### Binaries
+
+Found in [bin/Release](https://www.github.com/codemicro/codeChallenges/blob/master/imageNoise/bin/Release).

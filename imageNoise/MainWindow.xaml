@@ -7,6 +7,27 @@
         mc:Ignorable="d"
         Title="Image noise" Height="295" Width="365">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="20" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="20" />
+        </Grid.RowDefinitions>
         
+        <Border BorderBrush="Black" BorderThickness="1" Grid.Column="1" Grid.Row="1">
+            <Image x:Name="noiseImageViewer" Height="240" Width="320" />
+        </Border>
+        
+        <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
+            <TextBlock Text="FPS: " />
+            <TextBlock x:Name="fpsIndicator" Text="14" />
+        </StackPanel>
     </Grid>
 </Window>

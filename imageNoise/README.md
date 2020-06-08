@@ -14,3 +14,7 @@ Status: could be improved
 * Inefficient
   * Averages around 10fps
   * Could be improved with better looping and threading
+  
+#### Images
+
+![Screenshot](https://raw.githubusercontent.com/codemicro/codeChallenges/master/imageNoise/image.png)

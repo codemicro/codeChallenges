@@ -1,6 +1,6 @@
-# Image noise
+# MAC lookup
 
-http://rosettacode.org/wiki/Image_noise
+http://rosettacode.org/wiki/MAC_Vendor_Lookup
 
 ```
 Date: 11/06/2020
@@ -18,3 +18,4 @@ The MAC address can be supplied in the form `xx:xx:xx:xx:xx:xx` or `xx-xx-xx-xx-
 #### Binaries
 
 Found in [bin/Release](https://www.github.com/codemicro/codeChallenges/blob/master/imageNoise/bin/Release).
+

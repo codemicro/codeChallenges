@@ -8,7 +8,7 @@ def jaro_similarity(s1:str, s2:str) -> float:
   if s1 == s2:
     return 1.0
 
-  match_distance_requirement = int((s1_len if s1_len > s2_len else s2_len) / 2) - 1
+  match_distance_requirement = int(max(s1_len, s2_len) // 2) - 1  # Double divide means divide with remainder - gives number of times the x can go into y where y // x
 
   matches = 0
   transpositions = 0
@@ -29,6 +29,9 @@ def jaro_similarity(s1:str, s2:str) -> float:
         s2_matches[x] = True
         matches += 1
         break  # match found, no need to keep iterating
+
+  if matches == 0:
+    return 0.0
 
   # Find number of transpositions
   x = 0
@@ -51,6 +54,6 @@ def jaro_similarity(s1:str, s2:str) -> float:
   transpositions /= 2
 
   # Calulate similarity
-  sim = 1/3*((matches/s1_len) + (matches/s2_len) + ((matches-transpositions)/matches)) if matches != 0 else 0.0
+  sim = 1/3*((matches/s1_len) + (matches/s2_len) + ((matches-transpositions)/matches))
   
   return sim

@@ -36,44 +36,54 @@ def jaro_similarity(s1:str, s2:str) -> float:
   if s1_len == 0 and s2_len == 0:
     return 0.0
 
+  if s1 == s2:
+    return 1.0
+
   match_distance_requirement = int((s1_len if s1_len > s2_len else s2_len) / 2) - 1
   print(match_distance_requirement)
 
   matches = 0
   transpositions = 0
 
-  # Convert strings to lists
-  s1 = [c for c in s1]
-  s2 = [c for c in s2]
-
-  # Pad shortest list to length of longest list
-  # Needed?
-  pad_arrays(s1, s2)
-
   # Find matches
-  # The lists will always have the same content in a different order
-  s1_matches = []
-  s2_matches = []
+  s1_matches = [False] * s1_len
+  s2_matches = [False] * s2_len
 
-  for i, (s1c, s2c) in enumerate(zip(s1, s2)):
-    if is_match_present(s1c, s2, i, match_distance_requirement):
-      s1_matches.append(s1c)
+  for i in range(s1_len):
+    lower_bound = max(0, i - match_distance_requirement)
+    upper_bound = min(s2_len, i + match_distance_requirement)
+    
+    for x in range(lower_bound, upper_bound):
+      print(lower_bound, "-", upper_bound, "@", x, s1[i], s2[x], s1[i] == s2[x])
+      if s2_matches[x]:  # Already matched to something, so cannot use
+        continue
+        print("This triggered")
+      elif s1[i] == s2[x]:
+        s1_matches[i] = True
+        s2_matches[x] = True
 
-    if is_match_present(s2c, s1, i, match_distance_requirement):
-      s2_matches.append(s2c)
+        print(s1_matches, s2_matches)
+
+        matches += 1
+
+        break  # match found, no need to keep iterating
 
   print(s1_matches, s2_matches)
 
-  m = len(s1_matches)
-
   # Find number of transpositions
-  t = 0
-  for _, (s1m, s2m) in enumerate(zip(s1_matches, s2_matches)):
-    if s1m != s2m:
-      t += 1
-  t /= 2
+  for i in range(s1_len):
+    if not s1_matches[i]:
+      continue
+
+    for x in range(s2_len):
+      if s2_matches[x]:
+        if s1[i] != s2[x]:
+          transpositions += 1
+        s2_matches[x] = False
+
+  transpositions /= 2
 
   # Calulate similarity
-  sim = 1/3*((m/s1_len) + (m/s2_len) + ((m-t)/m)) if m != 0 else 0.0
+  sim = 1/3*((matches/s1_len) + (matches/s2_len) + ((matches-transpositions)/matches)) if matches != 0 else 0.0
   
   return sim

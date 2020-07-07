@@ -14,6 +14,7 @@ Status: could be improved
 * I'm not entirely certain that the Jaro-Winkler similarity implemented is completely accurate
   * I was using the Jellyfish library for Python to test similarities, but the Jaro-Winkler similarity implementation in that seems to be slightly different to that described on Wikipedia.
   * Furthermore, reference 2 goes into more detail about values *![p](https://latex.codecogs.com/gif.latex?p)* and *![l](https://latex.codecogs.com/gif.latex?l)* and their constraints, specifically that *"we must have ![p <= 0.25](https://latex.codecogs.com/gif.latex?p%20%5Cleq%200.25), but that is only because [...] ![l](https://latex.codecogs.com/gif.latex?l) was constrained to be ![<= 4](https://latex.codecogs.com/gif.latex?%5Cleq%204)"*
+  * This implementation limits *![p](https://latex.codecogs.com/gif.latex?p)* to *![0.25](https://latex.codecogs.com/gif.latex?0.25)*.
 
 #### Sample output (of tests)
 

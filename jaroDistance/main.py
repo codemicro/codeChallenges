@@ -47,25 +47,22 @@ def jaro_similarity(s1:str, s2:str) -> float:
   print(s1, s1_matches, s2, s2_matches)
 
   # Find number of transpositions
+  x = 0
   for i in range(s1_len):
     if not s1_matches[i]:
       continue
 
-    for x in range(s2_len):
-      if s2_matches[x]:
-        if s1[i] != s2[x]:
-          transpositions += 1
-        s2_matches[x] = False
+    # We shouldn't ever start iterating over s2 again, so we continue from where we left off in the previous iteration.
+    # This while loop waits for a match to occur in s2 before continuning 
+    while not s2_matches[x]:
+      x += 1
+    
+    if s1[i] != s2[x]:
+      # If the program ends up here, it means that that a match was found within the allowable range of match_distance_requirement,
+      # but NOT exactly in line
+      transpositions += 1
 
-  # k = 0
-  # for i in range(s1_len):
-  #   if not s1_matches[i]:
-  #     continue
-  #   while not s2_matches[k]:
-  #     k += 1
-  #   if s1[i] != s2[k]:
-  #     transpositions += 1
-  #   k += 1
+    x += 1
 
   transpositions /= 2
 

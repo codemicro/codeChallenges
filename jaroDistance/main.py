@@ -57,3 +57,21 @@ def jaro_similarity(s1:str, s2:str) -> float:
   sim = 1/3*((matches/s1_len) + (matches/s2_len) + ((matches-transpositions)/matches))
   
   return sim
+
+
+def jaro_winkler_similarity(s1, s2, scaling_constant=0.1):
+  plain_jaro_sim = jaro_similarity(s1, s2)
+
+  # Determine common prefix length
+  s1_prefix = s1[:4]
+  s2_prefix = s2[:4]
+  for i, (a, b) in enumerate(zip(s1, s2)):
+    if a != b:
+      break
+  prefix_length = i + 1
+
+  # Scaling constant may not exceed 0.25
+  if scaling_constant > 0.25:
+    scaling_constant = 0.25
+
+  return plain_jaro_sim + (prefix_length*scaling_constant*(1-plain_jaro_sim))

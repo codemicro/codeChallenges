@@ -2,7 +2,7 @@
 
 A collection of bits of code I wrote because I was bored, or just to do a tiny, specific thing.
 
-### Completed challenges
+### Index of things
 
 * [**Image noise** - C#, 08/06/2020](https://github.com/codemicro/codeChallenges/tree/master/imageNoise)
 * [**MAC lookup** - C#, 11/06/2020](https://github.com/codemicro/codeChallenges/tree/master/macLookup)

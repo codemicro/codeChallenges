@@ -1,6 +1,6 @@
-# Code Challenges
+# Various bits of code
 
-A collection of bits of code I wrote because I was bored.
+A collection of bits of code I wrote because I was bored, or just to do a tiny, specific thing.
 
 ### Completed challenges
 

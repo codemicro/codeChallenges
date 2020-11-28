@@ -7,6 +7,7 @@ A collection of bits of code I wrote because I was bored, or just to do a tiny, 
 * [**Image noise** - C#, 08/06/2020](https://github.com/codemicro/codeChallenges/tree/master/imageNoise)
 * [**MAC lookup** - C#, 11/06/2020](https://github.com/codemicro/codeChallenges/tree/master/macLookup)
 * [**Jaro distance** - Python, 07/07/2020](https://github.com/codemicro/codeChallenges/tree/master/jaroDistance)
+* [**Image merge** - Python, 28/11/2020](https://github.com/codemicro/codeChallenges/tree/master/imageMerge)
 
 ### Shortlist of things to do next
 
